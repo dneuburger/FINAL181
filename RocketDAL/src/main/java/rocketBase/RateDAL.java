@@ -28,11 +28,15 @@ public class RateDAL {
 			//TODO - RocketDALRateDAL.getAllRates
 			//			probably not a bad idea to sort the results...  Add an OrderBy
 			//			example can be found here:
-			//  		http://www.tutorialspoint.com/hibernate/hibernate_query_language.htm			
+			//  		http://www.tutorialspoint.com/hibernate/hibernate_query_language.htm	
+			
 			List lstRates = session.createQuery("FROM RateDomainModel").list();
 			for (Iterator iterator = lstRates.iterator(); iterator.hasNext();) {
 				RateDomainModel rte = (RateDomainModel) iterator.next();
 				alRates.add(rte);
+				String hql = "FROM Employee E WHERE E.id > 10 ORDER BY E.salary DESC";
+				Query query = session.createQuery(hql);
+				List results = query.list();
 			}
 			
 			tx.commit();
